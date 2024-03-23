@@ -38,7 +38,7 @@ export default {
   display: flex;
 }
 
-.two-columns {
+.two-columns { /* This class isn't used */
   flex-direction: row;
   justify-content: space-between;
 }
