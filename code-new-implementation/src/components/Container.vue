@@ -1,20 +1,27 @@
 <template>
-  <div id="container-wrapper">
-    <div style="width: 50%">
-      <h1 style="font-size: 14px; color:#229392;">Current</h1>
-      <display-current :data="data"></display-current>
+  <div class="flex">
+    <div class="bg-slate-200 pa-6 rounded-xl shadow-lg m-2 w-1/3">
+      <div class="bg-blue-500 px-6 py-6 rounded-xl shadow-lg text-white font-semibold">
+        <h1>Current</h1>
+      </div>
+      <display-current :data="data" v-if="data"></display-current>
     </div>
-    <div style="width: 50%">
-      <h1 style="font-size: 14px; color:#229392;">Previous quotes</h1>
-      <DisplayPrev :previous-data="previousData"></DisplayPrev>
+    <div class="bg-slate-200 pa-6 rounded-xl shadow-lg m-2 w-2/3">
+      <div class="bg-blue-500 px-6 py-6 rounded-xl shadow-lg text-white font-semibold">
+        <h1>Previous quotes</h1>
+      </div>
+      <DisplayPrev
+        v-if="previousData.length"
+        :previous-data="previousData"
+        @deleteJoke="$emit('deleteJoke', $event)"
+      ></DisplayPrev>
     </div>
-
   </div>
 </template>
 
 <script>
-import DisplayCurrent from '@/components/DisplayCurrent.vue';
-import DisplayPrev from './DisplayPrev.vue';
+import DisplayCurrent from "@/components/DisplayCurrent.vue";
+import DisplayPrev from "./DisplayPrev.vue";
 
 export default {
   components: {
@@ -33,13 +40,3 @@ export default {
   },
 };
 </script>
-<style>
-#container-wrapper {
-  display: flex;
-}
-
-.two-columns {
-  flex-direction: row;
-  justify-content: space-between;
-}
-</style>

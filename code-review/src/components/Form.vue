@@ -45,7 +45,8 @@ export default {
     },
   },
   data() {
-    return { // In general all this data values need a better names.)
+    return {
+      // In general all this data values need a better names.)
       newText: "",
       selectedCategory: "",
       data: {
@@ -55,12 +56,13 @@ export default {
     };
   },
   methods: {
-    create() { // All this code isn't needed,
+    create() {
       this.$global.previousData.push({ value: this.newText }); // don't use $global in a component, use (this.data) instead.
       this.data = { value: this.newText };
       this.previousData = this.$global.previousData; // don't use $global in a component, use (this.data) instead.
     },
-    fetchRandom() { // Refactor, split and export this function to a global service. So you can re-use it in other components.
+    fetchRandom() {
+      // Refactor, split and export this function to a global service. So you can re-use it in other components.
       const apiUrl = this.selectedCategory
         ? `https://api.chucknorris.io/jokes/random?category=${this.selectedCategory}`
         : "https://api.chucknorris.io/jokes/random";
