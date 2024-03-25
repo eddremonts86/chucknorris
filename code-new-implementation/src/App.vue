@@ -1,5 +1,5 @@
 <template>
-  <baseLayout  id="app">
+  <baseLayout id="app">
     <RouterView />
   </baseLayout>
 </template>

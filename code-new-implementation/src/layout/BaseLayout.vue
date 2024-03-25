@@ -3,7 +3,8 @@
     <header>
       <nav-bar />
     </header>
-    <main class="bg-white">
+
+    <main class="bg-white dark:bg-slate-900 min-h-screen">
       <slot />
     </main>
   </div>

@@ -2,11 +2,11 @@
   <div>
     <div class="flex">
       <div class="flex-col w-1/2">
-        <form @submit.prevent="getRandom()" class="bg-gray-100 p-6 rounded-lg m-2">
+        <form @submit.prevent="getRandom()" class="bg-gray-100 p-6 rounded-lg m-2 dark:bg-gray-800">
           <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
             Generate random jokes
           </h2>
-          <label for="SelectCategory" class="pb-2">Select a category:</label>
+          <label for="SelectCategory" class="pb-2 dark:text-white">Select a category:</label>
           <FormCategorySelector
             class="block w-full"
             id="SelectCategory"
@@ -17,14 +17,16 @@
           />
           <cr-btn class="block my-5" type="submit" text="Get a random Joke" />
           <br />
-          <b>Press <span style="color: #229392">'Ctrl + Y'</span> for new joke</b>
+          <b class="dark:text-stone-100"
+            >Press <span style="color: #229392">'Ctrl + Y'</span> for new joke</b
+          >
         </form>
-        <form @submit.prevent="create()" class="bg-gray-100 p-6 rounded-lg m-2">
+        <form @submit.prevent="create()" class="bg-gray-100 p-6 rounded-lg m-2 dark:bg-gray-800">
           <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
             Create your own jokes
           </h2>
 
-          <label for="createJokes" class="pb-2">Write a joke:</label>
+          <label for="createJokes" class="pb-2 dark:text-white">Write a joke:</label>
           <textarea
             class="block w-full rounded-xl px-3 py-4"
             name="createJokes"
@@ -35,7 +37,7 @@
         </form>
       </div>
       <div class="flex-col w-1/2" v-if="joke">
-        <div class="bg-gray-100 p-6 rounded-lg m-2">
+        <div class="bg-gray-100 p-6 rounded-lg m-2 dark:bg-gray-700">
           <h2 class="text-xl font-semibold text-gray-800 dark:text-white">New joke</h2>
           <joke-card :key="joke.id" :joke="joke" @delete="deleteJokeById" />
         </div>
@@ -72,6 +74,9 @@ export default {
   methods: {
     ...mapActions(["fetchJokeByCategory", "fetchRandomJoke", "updateJokes", "updateJoke"]),
     create() {
+      if (!this.jokeContent) {
+        return;
+      }
       const joke = { value: this.jokeContent, id: Date.now().toString() };
       this.updateJoke(joke);
       this.updateJokes([joke, ...this.jokes]);

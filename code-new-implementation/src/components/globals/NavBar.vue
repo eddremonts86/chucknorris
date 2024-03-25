@@ -1,5 +1,5 @@
 <template>
-  <div class="dark:bg-gray-900 border-b-4 border-blue-500">
+  <div class="dark:bg-gray-800 border-b-4 border-blue-500 dark:border-white">
     <nav x-data="{ isOpen: false }" class="relative bg-white shadow dark:bg-gray-800">
       <div class="container px-6 py-3 mx-auto md:flex">
         <div class="flex items-center justify-between">
