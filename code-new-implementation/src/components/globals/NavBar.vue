@@ -17,7 +17,7 @@
               aria-label="toggle menu"
             >
               <svg
-                x-show="!isOpen"
+                v-if="!isOpen"
                 xmlns="http://www.w3.org/2000/svg"
                 class="w-6 h-6"
                 fill="none"
@@ -29,7 +29,7 @@
               </svg>
 
               <svg
-                x-show="isOpen"
+                v-else
                 xmlns="http://www.w3.org/2000/svg"
                 class="w-6 h-6"
                 fill="none"
