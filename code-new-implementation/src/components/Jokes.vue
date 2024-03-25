@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-start min-h-screen py-2">
+  <div class="flex flex-col items-center justify-start min-h-screen py-2 px-6">
     <div class="flex flex-col items-center justify-start pt-6 pb-6">
       <h1 class="text-4xl font-semibold text-gray-800 dark:text-white lg:text-4xl">
         {{ header }} : {{ jokes.length }} jokes

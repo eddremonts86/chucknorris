@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <div class="flex flex-col md:flex-row">
+    <div class="flex flex-col md:flex-row pb-24">
       <div class="flex-col w-full md:w-1/2">
-        <form @submit.prevent="getRandom()" class="bg-gray-100 p-6 rounded-lg m-2 dark:bg-gray-800">
+        <form
+          @submit.prevent="getRandom()"
+          class="bg-gray-100 p-6 rounded-lg m-2 dark:bg-gray-800 min-w-full"
+        >
           <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
             Generate random jokes
           </h2>
@@ -23,7 +25,10 @@
             for new joke
           </b>
         </form>
-        <form @submit.prevent="create()" class="bg-gray-100 p-6 rounded-lg m-2 dark:bg-gray-800">
+        <form
+          @submit.prevent="create()"
+          class="bg-gray-100 p-6 rounded-lg m-2 dark:bg-gray-800 min-w-full"
+        >
           <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
             Create your own jokes
           </h2>
@@ -41,13 +46,12 @@
         </form>
       </div>
       <div class="flex-col w-full md:w-1/2 justify-center items-center" v-if="joke">
-        <div class="bg-gray-100 p-6 rounded-lg m-2 dark:bg-gray-700">
+        <div class="bg-gray-100 p-6 rounded-lg m-2 dark:bg-gray-700 min-w-full">
           <h2 class="text-xl font-semibold text-gray-800 dark:text-white">New joke</h2>
           <joke-card :key="joke.id" :joke="joke" @delete="deleteJokeById" />
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
