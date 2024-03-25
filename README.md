@@ -29,6 +29,7 @@ $ npm run serve
 
 - Integrate husky for git hooks, format and checks before committing
 - Add tests, Vitest(UniTest) and Cypres(E2E)
+- Better mobil support
 - Add PWA support
 - Add email subscription support(home page)
 - Add dark mode support(btn toggle), system already support OS preference and browser preference color theme
