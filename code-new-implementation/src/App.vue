@@ -1,5 +1,5 @@
 <template>
-  <baseLayout id="app" class="overflow-hidden">
+  <baseLayout id="app" class="overflow-hidden pb-24">
     <RouterView />
   </baseLayout>
 </template>

@@ -5,7 +5,7 @@
     </header>
 
     <main
-      class="bg-white dark:bg-slate-900 min-h-screen max-h-screen overflow-auto pb-16 flex justify-center"
+      class="bg-white dark:bg-slate-900 min-h-screen max-h-screen overflow-auto flex justify-center pb-24"
     >
       <div class="max-w-screen-3xl">
         <slot />
