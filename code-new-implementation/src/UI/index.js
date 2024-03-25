@@ -1,4 +1,4 @@
-import Vue from "vue";
-import crBtn from "@/UI/CrBtn.vue";
+import Vue from 'vue';
+import crBtn from '@/UI/CrBtn.vue';
 
-Vue.component("cr-btn", crBtn);
+Vue.component('cr-btn', crBtn);

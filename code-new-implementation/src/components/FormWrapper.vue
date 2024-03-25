@@ -2,15 +2,10 @@
   <div>
     <div class="flex">
       <div class="flex-col w-1/2">
-        <form @submit.prevent="create()" class="bg-slate-300 p-6 rounded-lg shadow-lg m-2">
-          <label for="createJokes" class="pb-2">Create your own:</label>
-          <textarea class="block w-full" name="createJokes" id="createJokes" v-model="newText" />
-          <hr class="border-neutral-400 border-y-1 my-4" />
-          <cr-btn type="submit" text="Create" />
-        </form>
-      </div>
-      <div class="flex-col w-1/2">
-        <form @submit.prevent="getRandom()" class="bg-slate-300 p-6 rounded-lg shadow-lg m-2">
+        <form @submit.prevent="getRandom()" class="bg-gray-100 p-6 rounded-lg m-2">
+          <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
+            Generate random jokes
+          </h2>
           <label for="SelectCategory" class="pb-2">Select a category:</label>
           <FormCategorySelector
             class="block w-full"
@@ -20,27 +15,44 @@
             :categories="categories"
             @update="selectedCategory = $event"
           />
-          <hr class="border-neutral-400 border-y-1 my-4" />
-          <cr-btn class="block" type="submit" text="Get a random Joke" />
-          <div>
-            <b>Press <span style="color: #229392">'Ctrl + Y'</span> for new joke</b>
-          </div>
+          <cr-btn class="block my-5" type="submit" text="Get a random Joke" />
+          <br />
+          <b>Press <span style="color: #229392">'Ctrl + Y'</span> for new joke</b>
+        </form>
+        <form @submit.prevent="create()" class="bg-gray-100 p-6 rounded-lg m-2">
+          <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
+            Create your own jokes
+          </h2>
+
+          <label for="createJokes" class="pb-2">Write a joke:</label>
+          <textarea
+            class="block w-full rounded-xl px-3 py-4"
+            name="createJokes"
+            id="createJokes"
+            v-model="jokeContent"
+          />
+          <cr-btn type="submit" text="Create" class="block my-5" />
         </form>
       </div>
+      <div class="flex-col w-1/2" v-if="joke">
+        <div class="bg-gray-100 p-6 rounded-lg m-2">
+          <h2 class="text-xl font-semibold text-gray-800 dark:text-white">New joke</h2>
+          <joke-card :key="joke.id" :joke="joke" @delete="deleteJokeById" />
+        </div>
+      </div>
     </div>
-
-    <Container :previous-data="previousData" :data="data" @deleteJoke="removeJoke($event)" />
   </div>
 </template>
 
 <script>
-import Container from "@/components/Container.vue";
 import FormCategorySelector from "@/components/FormCategorySelector.vue";
-import { fetchRandom, fetchRandomByCategory } from "@/services/jokes.api";
+import JokeCard from "@/components/globals/JokeCard.vue";
+import { mapActions, mapState } from "vuex";
+
 export default {
   components: {
     FormCategorySelector,
-    Container,
+    JokeCard,
   },
   props: {
     categories: {
@@ -50,46 +62,46 @@ export default {
   },
   data() {
     return {
-      newText: "",
+      jokeContent: "",
       selectedCategory: "",
-      data: null,
-      previousData: [],
     };
   },
+  computed: {
+    ...mapState(["jokes", "joke"]),
+  },
   methods: {
+    ...mapActions(["fetchJokeByCategory", "fetchRandomJoke", "updateJokes", "updateJoke"]),
     create() {
-      const joke = { value: this.newText, id: Date.now().toString() };
-      this.previousData = [joke, ...this.previousData];
-      this.data = { value: this.newText };
-      this.newText = "";
+      const joke = { value: this.jokeContent, id: Date.now().toString() };
+      this.updateJoke(joke);
+      this.updateJokes([joke, ...this.jokes]);
+      this.jokeContent = "";
     },
-
     async getRandom() {
-      const response = this.selectedCategory
-        ? await fetchRandomByCategory(this.selectedCategory)
-        : await fetchRandom();
-      this.data = response;
-      if (response.id !== "error") {
-        this.previousData = [response, ...this.previousData];
-      }
+      this.selectedCategory
+        ? await this.fetchJokeByCategory(this.selectedCategory)
+        : await this.fetchRandomJoke();
+      this.updateJokes([this.joke, ...this.jokes]);
     },
-    getRandomByKeyCombination(event) {
+    async getRandomByKeyCombination(event) {
       if (!event.ctrlKey) {
         return;
       }
       if (event.code === "KeyY") {
         event.preventDefault();
-        this.getRandom();
+        await this.fetchRandomJoke();
+        this.updateJokes([this.joke, ...this.jokes]);
       }
     },
-
     removeJoke(id) {
-      this.previousData = this.previousData.filter((joke) => joke.id !== id);
-      if (!this.previousData.length) {
-        this.data = null;
+      const previousJokes = this.jokes.filter((joke) => joke.id !== id);
+      this.updateJokes(previousJokes);
+      if (!this.jokes.length) {
+        this.updateJoke(null);
       }
     },
   },
+
   mounted() {
     window.addEventListener("keypress", this.getRandomByKeyCombination);
   },
@@ -98,4 +110,3 @@ export default {
   },
 };
 </script>
-@/services/jokes.api

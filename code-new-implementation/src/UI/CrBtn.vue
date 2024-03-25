@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "CrBtn",
+  name: 'CrBtn',
   props: {
     text: {
       type: String,
@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     handleClick() {
-      this.$emit("click");
+      this.$emit('click');
     },
   },
 };

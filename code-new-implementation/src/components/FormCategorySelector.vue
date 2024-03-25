@@ -1,5 +1,5 @@
 <template>
-  <select v-model="selectedValue" id="category">
+  <select v-model="selectedValue" id="category" class="rounded-xl border-2 border-blue-500 p-2">
     <option value="">Any</option>
     <option v-for="category in categories" :key="category" :value="category">
       {{ formatText(category) }}
@@ -9,6 +9,7 @@
 
 <script>
 import { capitalizeFirstLetter } from "@/utils/helpers";
+
 export default {
   props: {
     selectedCategory: String,

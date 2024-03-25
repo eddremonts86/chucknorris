@@ -1,16 +1,16 @@
-import axios from "axios";
+import axios from 'axios';
 
 const errorsDefValue = {
-  category: "",
-  icon_url: "",
-  id: "error",
-  url: "",
-  value: "",
+  category: '',
+  icon_url: '',
+  id: 'error',
+  url: '',
+  value: '',
 };
 
 export const fetchRandom = async () => {
   try {
-    const apiUrl = `https://api.chucknorris.io/jokes/random`;
+    const apiUrl = 'https://api.chucknorris.io/jokes/random';
     const response = await axios.get(apiUrl);
     return response.data;
   } catch (error) {
@@ -30,7 +30,7 @@ export const fetchRandomByCategory = async (category) => {
 
 export const fetchCategories = async () => {
   try {
-    const apiUrl = `https://api.chucknorris.io/jokes/categories`;
+    const apiUrl = 'https://api.chucknorris.io/jokes/categories';
     const response = await axios.get(apiUrl);
     return response.data;
   } catch (error) {

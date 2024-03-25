@@ -11,7 +11,9 @@
     "axios": "^1.6.7",
     "core-js": "^3.8.3",
     "postcss-cli": "^11.0.0",
-    "vue": "^2.7.0"
+    "vue": "^2.7.0",
+    "vue-router": "^3.5.1",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -21,6 +23,8 @@
     "@tailwindcss/typography": "^0.5.10",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "@vue/eslint-config-airbnb": "^6.0.0",
     "autoprefixer": "^10.4.19",
