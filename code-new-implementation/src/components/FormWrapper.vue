@@ -26,13 +26,15 @@
             Create your own jokes
           </h2>
 
-          <label for="createJokes" class="pb-2 dark:text-white">Write a joke:</label>
-          <textarea
-            class="block w-full rounded-xl px-3 py-4"
-            name="createJokes"
-            id="createJokes"
-            v-model="jokeContent"
-          />
+          <label for="createJokes" class="pb-2 dark:text-white"
+            >Write a joke:
+            <textarea
+              class="block w-full rounded-xl px-3 py-4 dark:text-black"
+              name="createJokes"
+              id="createJokes"
+              v-model="jokeContent"
+            />
+          </label>
           <cr-btn type="submit" text="Create" class="block my-5" />
         </form>
       </div>
@@ -47,9 +49,9 @@
 </template>
 
 <script>
-import FormCategorySelector from "@/components/FormCategorySelector.vue";
-import JokeCard from "@/components/globals/JokeCard.vue";
-import { mapActions, mapState } from "vuex";
+import FormCategorySelector from '@/components/FormCategorySelector.vue';
+import JokeCard from '@/components/globals/JokeCard.vue';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   components: {
@@ -64,15 +66,15 @@ export default {
   },
   data() {
     return {
-      jokeContent: "",
-      selectedCategory: "",
+      jokeContent: '',
+      selectedCategory: '',
     };
   },
   computed: {
-    ...mapState(["jokes", "joke"]),
+    ...mapState(['jokes', 'joke']),
   },
   methods: {
-    ...mapActions(["fetchJokeByCategory", "fetchRandomJoke", "updateJokes", "updateJoke"]),
+    ...mapActions(['fetchJokeByCategory', 'fetchRandomJoke', 'updateJokes', 'updateJoke']),
     create() {
       if (!this.jokeContent) {
         return;
@@ -80,38 +82,33 @@ export default {
       const joke = { value: this.jokeContent, id: Date.now().toString() };
       this.updateJoke(joke);
       this.updateJokes([joke, ...this.jokes]);
-      this.jokeContent = "";
+      this.jokeContent = '';
     },
     async getRandom() {
-      this.selectedCategory
-        ? await this.fetchJokeByCategory(this.selectedCategory)
-        : await this.fetchRandomJoke();
+      if (this.selectedCategory) {
+        await this.fetchJokeByCategory(this.selectedCategory);
+      } else {
+        await this.fetchRandomJoke();
+      }
       this.updateJokes([this.joke, ...this.jokes]);
     },
     async getRandomByKeyCombination(event) {
       if (!event.ctrlKey) {
         return;
       }
-      if (event.code === "KeyY") {
+      if (event.code === 'KeyY') {
         event.preventDefault();
         await this.fetchRandomJoke();
         this.updateJokes([this.joke, ...this.jokes]);
       }
     },
-    removeJoke(id) {
-      const previousJokes = this.jokes.filter((joke) => joke.id !== id);
-      this.updateJokes(previousJokes);
-      if (!this.jokes.length) {
-        this.updateJoke(null);
-      }
-    },
   },
 
   mounted() {
-    window.addEventListener("keypress", this.getRandomByKeyCombination);
+    window.addEventListener('keypress', this.getRandomByKeyCombination);
   },
   beforeDestroy() {
-    window.removeEventListener("keypress", this.getRandomByKeyCombination);
+    window.removeEventListener('keypress', this.getRandomByKeyCombination);
   },
 };
 </script>

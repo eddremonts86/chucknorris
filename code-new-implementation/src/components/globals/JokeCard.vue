@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "TestimonialCard",
+  name: 'TestimonialCard',
   props: {
     joke: {
       type: Object,
@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     jokeImage() {
-      return "https://merakiui.com/images/components/Email-campaign-bro.svg";
+      return 'https://merakiui.com/images/components/Email-campaign-bro.svg';
     },
   },
 };

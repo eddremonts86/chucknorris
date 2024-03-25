@@ -7,22 +7,22 @@
 </template>
 
 <script>
-import formWrapper from "@/components/FormWrapper.vue";
-import { mapActions, mapState } from "vuex";
+import formWrapper from '@/components/FormWrapper.vue';
+import { mapActions, mapState } from 'vuex';
 
 export default {
-  name: "HomeView",
+  name: 'HomeView',
   components: {
     formWrapper,
   },
   computed: {
-    ...mapState(["categories"]),
+    ...mapState(['categories']),
   },
   async mounted() {
     await this.fetchCategories();
   },
   methods: {
-    ...mapActions(["fetchCategories"]),
+    ...mapActions(['fetchCategories']),
   },
 };
 </script>

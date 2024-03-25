@@ -1,0 +1,5 @@
+.github
+locales/*
+tests/fixtures/data/*
+packages/api/types/*
+pnpm-lock.yaml

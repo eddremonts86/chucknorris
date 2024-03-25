@@ -3,18 +3,19 @@
 </template>
 
 <script>
-import jokes from "@/components/Jokes.vue";
-import { mapActions, mapState } from "vuex";
+import jokes from '@/components/Jokes.vue';
+import { mapActions, mapState } from 'vuex';
+
 export default {
-  name: "Historical",
+  name: 'Historical',
   components: {
     jokes,
   },
   computed: {
-    ...mapState(["jokes"]),
+    ...mapState(['jokes']),
   },
   methods: {
-    ...mapActions(["deleteJoke"]),
+    ...mapActions(['deleteJoke']),
     deleteJokeById(id) {
       this.deleteJoke(id);
     },

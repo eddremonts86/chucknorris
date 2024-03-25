@@ -53,18 +53,21 @@
             <router-link
               to="/"
               class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mx-2"
-              >Home</router-link
             >
+              Home
+            </router-link>
             <router-link
               to="/create"
               class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mx-2"
-              >Generate jokes</router-link
             >
+              Generate jokes
+            </router-link>
             <router-link
               to="/historical"
               class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mx-2"
-              >Historical</router-link
             >
+              Historical
+            </router-link>
           </div>
 
           <div class="relative mt-4 md:mt-0">
@@ -79,16 +82,19 @@
                 ></path>
               </svg>
             </span>
-
-            <input
-              type="text"
-              class="w-full py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
-              placeholder="Search for jokes"
-              v-model="search"
-              @input="fetchSearchQuery(search)"
-              @keyup.enter="getJokes()"
-              @focus="error = false"
-            />
+            <label for="search">
+              <input
+                type="text"
+                id="search"
+                name="search"
+                class="w-full py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
+                placeholder="Search for jokes"
+                v-model="search"
+                @input="fetchSearchQuery(search)"
+                @keyup.enter="getJokes()"
+                @focus="error = false"
+              />
+            </label>
           </div>
         </div>
       </div>
@@ -97,10 +103,10 @@
 </template>
 
 <script lang="ts">
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from 'vuex';
 
 export default {
-  name: "NavBar",
+  name: 'NavBar',
   data() {
     return {
       search: null,
@@ -109,10 +115,10 @@ export default {
     };
   },
   computed: {
-    ...mapState(["searchQuery"]),
+    ...mapState(['searchQuery']),
   },
   methods: {
-    ...mapActions(["fetchSearch", "fetchSearchQuery"]),
+    ...mapActions(['fetchSearch', 'fetchSearchQuery']),
 
     async getJokes() {
       if (this.search.length <= 3) {
@@ -121,7 +127,10 @@ export default {
       }
       await this.fetchSearch();
       this.search = this.searchQuery;
-      this.$router.push({ name: "search" });
+      const { name } = this.$route;
+      if (name !== 'search') {
+        this.$router.push({ name: 'search' });
+      }
     },
   },
 };

@@ -1,12 +1,13 @@
 <template>
-  <baseLayout id="app">
+  <baseLayout id="app" class="overflow-hidden">
     <RouterView />
   </baseLayout>
 </template>
 <script>
-import baseLayout from "@/layout/BaseLayout.vue";
+import baseLayout from '@/layout/BaseLayout.vue';
+
 export default {
-  name: "App",
+  name: 'App',
   components: {
     baseLayout,
   },
